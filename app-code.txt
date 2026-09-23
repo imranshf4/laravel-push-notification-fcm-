@@ -1,0 +1,39 @@
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "{{ env('FIREBASE_API_KEY') }}",
+            authDomain: "{{ env('FIREBASE_AUTH_DOMAIN') }}",
+            projectId: "{{ env('FIREBASE_PROJECT_ID') }}",
+            storageBucket: "{{ env('FIREBASE_STORAGE_BUCKET') }}",
+            messagingSenderId: "{{ env('FIREBASE_MESSAGING_SENDER_ID') }}",
+            appId: "{{ env('FIREBASE_APP_ID') }}"
+        };
+
+        // Init Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Init Messaging
+        const messaging = firebase.messaging();
+
+        // Request Notification Permission
+        Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+
+                // Get FCM Token
+                messaging.getToken({
+                    vapidKey: "{{ env('FIREBASE_VAPID_KEY') }}"
+                }).then((token) => {
+                    console.log("FCM Token:", token);
+                });
+
+            } else {
+                console.log("Notification permission denied.");
+            }
+        });
+    </script>
+
+
+composer require google/auth
