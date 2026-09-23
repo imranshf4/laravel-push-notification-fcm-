@@ -2413,10 +2413,6 @@
 @endif -->
 
 @if(auth()->guard('web')->check())
-<button id="enable-notifications" class="inline-block px-5 py-1.5 border border-[#19140035] rounded-sm text-sm leading-normal fixed bottom-4 right-4 bg-white">
-    Enable notifications
-</button>
-
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
 <script>
